@@ -1,0 +1,23 @@
+{
+  "name": "beaverbird",
+  "version": "0.1.0",
+  "description": "tracking",
+  "main": "beaverbird.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexanderSelzer/beaverbird.git"
+  },
+  "author": "Alexander Selzer <aselzer3@gmail.com> (http://alexselzer.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexanderSelzer/beaverbird/issues"
+  },
+  "homepage": "https://github.com/AlexanderSelzer/beaverbird"
+}

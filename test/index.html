@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html>
+  <head>
+    <script src="../beaverbird.js"></script>
+  </head>
+
+  <body>
+
+
+  <script>
+    // BeaverBird.DEBUG = true;
+
+    var canvasId = BeaverBird.canvas()
+    var fonts = BeaverBird.fonts()
+    var data = BeaverBird.data()
+
+    console.log("canvas id: ", canvasId)
+    console.log("uid:", BeaverBird.uid())
+    console.log("data: ", BeaverBird.data())
+    console.log("fonts: ", fonts)
+
+    console.log("canvas matches: ", BeaverBird.matchCanvas(canvasId))
+    console.log("fonts match:", BeaverBird.matchFonts(fonts))
+    console.log("data matches:", BeaverBird.matchData(data))
+    </script>
+  </body>
+</html>
