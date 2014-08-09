@@ -11,10 +11,12 @@
   <script>
     // BeaverBird.DEBUG = true;
 
+    var time = new Date()
     var canvasId = BeaverBird.canvas()
     var fonts = BeaverBird.fonts()
     var data = BeaverBird.data()
     var uid = BeaverBird.uid()
+    console.log("time:", ((new Date()) - time))
 
     console.log("canvas id: ", canvasId)
     console.log("uid:", uid)
