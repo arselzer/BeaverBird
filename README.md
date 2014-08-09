@@ -33,7 +33,7 @@ var isTheSameUser = BeaverBird.match(uid)
   Get the raw data.
 */
 
-var userData = BeaverBird.allData();
+var userData = BeaverBird.data();
 
 /*
   Want to directly access some useful data, such as the font collection
@@ -41,6 +41,9 @@ var userData = BeaverBird.allData();
 */
 
 var fonts = BeaverBird.fonts();
+if (fonts.indexOf("Open Sans") !== -1) {
+  // Hmm, the user installed Open Sans
+}
 ```
 
 ## Full Documentation
