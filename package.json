@@ -1,6 +1,6 @@
 {
   "name": "beaverbird",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "tracking",
   "main": "beaverbird.js",
   "directories": {
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/AlexanderSelzer/beaverbird/issues"
   },
-  "homepage": "https://github.com/AlexanderSelzer/beaverbird"
+  "homepage": "https://github.com/AlexanderSelzer/beaverbird",
+  "dependencies": {
+    
+  }
 }
