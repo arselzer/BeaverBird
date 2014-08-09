@@ -11,10 +11,10 @@ BeaverBird.clearCache = function() {
 
 BeaverBird.uid = function() {
   var data = this.data()
-  return data.canvasFingerprint
+  return SparkMD5.hash(data.canvasFingerprint
   + ":" + data.dnt // this is actually very Browser-specific ;)
   + ":" + data.lang
-  + ":" + SparkMD5.hash(data.fonts.join(":"))
+  + ":" + SparkMD5.hash(data.fonts.join(":")))
 }
 
 BeaverBird.match = function(uid) {
