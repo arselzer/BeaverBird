@@ -66,6 +66,14 @@ BeaverBird.match("e77c2b954e31a63d14be9d0f9aa226a6")
 // true
 ```
 
+## Getting BeaverBird
+
+Download [the latest release](https://github.com/AlexanderSelzer/BeaverBird/releases).
+
+Install from npm: `npm install --save beaverbird`
+
+Include in a <script> tag or use Browserify.
+
 ## Full Documentation
 
 See [here](https://github.com/AlexanderSelzer/BeaverBird/blob/master/docs/BeaverBird.md)
