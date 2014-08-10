@@ -8,42 +8,62 @@ There is no more such thing as untracked behaviour on the web.
 BeaverBird takes a step to simplify the techniques that would otherwise be reimplemented again and again
 in private by some big companies desperately needing "insight into their customers' interactions with their sites (and others)".
 
-## Simple Usage
+## Usage
 
 ```JavaScript
+/* Get a unique id to recognize the user next time. */
 var uid = BeaverBird.uid()
 
-/*
-  Send the unique user id to your servers in order to follow
-  the user and make the world a better place by analyzing their
-  behaviour. :D
-*/
+// e77c2b954e31a63d14be9d0f9aa226a6
 
-var isTheSameUser = BeaverBird.match(uid)
-```
+/* Get an object of all data extracted by BeaverBird */
+var data = BeaverBird.data()
 
-## Advanced Usage
-
-```JavaScript
-
-/*
-  Don't trust beaverbird to correctly generate a unique tracking id
-  for your mission-critical tracking system.
-  No problem.
-  Get the raw data.
-*/
-
-var userData = BeaverBird.data();
-
-/*
-  Want to directly access some useful data, such as the font collection
-  of the user?
-*/
-
-var fonts = BeaverBird.fonts();
-if (fonts.indexOf("Open Sans") !== -1) {
-  // Hmm, the user installed Open Sans
+/* {
+  "canvasFingerprint": 1054387288,
+  "fonts": [
+    "Adobe Hebrew",
+    "Apple LiGothic",
+    "Arial",
+    "Avenir",
+    "Avenir Next",
+    "Batang",
+    "Bell MT",
+    "Birch Std",
+    "Calibri",
+    "Cambria",
+    "Century",
+    "Century Gothic",
+    "Comic Neue",
+    "Comic Sans MS",
+    "Corsiva Hebrew",
+    "Courier",
+    "Courier New",
+    "Damascus",
+    "Fantasque Sans Mono",
+    "Futura",
+    "Geneva",
+    "Helvetica",
+    "Helvetica Neue",
+    "Lato",
+    "Microsoft Sans Serif",
+    "Minion Pro",
+    "Monaco",
+    "Open Sans",
+    "TI-Nspire",
+    "Times",
+    "Times New Roman"
+  ],
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36",
+  "dnt": null,
+  "javaEnabled": true,
+  "lang": "de"
 }
+*/
+
+/* Verify the user id */
+BeaverBird.match("e77c2b954e31a63d14be9d0f9aa226a6")
+// true
 ```
 
 ## Full Documentation
