@@ -1,0 +1,27 @@
+{
+  "name": "beaverbird",
+  "main": "beaverbird.js",
+  "version": "0.4.1",
+  "authors": [
+    "Alexander Selzer <aselzer3@gmail.com>"
+  ],
+  "description": "Tracking with extra creepiness",
+  "keywords": [
+    "tracking",
+    "canvas",
+    "fonts"
+  ],
+  "license": "MIT",
+  "homepage": "http://beaverbird.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AlexanderSelzer/beaverbird.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
