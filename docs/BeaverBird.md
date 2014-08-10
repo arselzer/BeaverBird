@@ -18,18 +18,24 @@ Returns the canvas fingerprint (a crc32 hash)
 
 ## BeaverBird.matchCanvas(string) -> boolean
 
-Checks if the canvas fingerprint matches.
+Checks if the canvas fingerprint matches the current client's.
 
 ## BeaverBird.fonts([]string fonts) -> []string
 
-Returns all fonts from a list
-If `fonts` is defined, the default fonts will not be used.
+If `fonts` is defined, the default fonts will not be used,
+otherwise, the default list of fonts will be used.
+
+This list will be enhanced with time, but it will when changes
+break backwards-compability.
 
 ## BeaverBird.matchFonts([]string] input) -> boolean
 
-Checks if the fonts are exactly the same
+Checks if the lists of fonts are exactly the same
 
-## BeaverBird.data() -> {
+## BeaverBird.data()
+returns a list of all tracking data that could be extracted.
+```
+{
   canvasFingerprint
   fonts
   userAgent
@@ -37,6 +43,7 @@ Checks if the fonts are exactly the same
   javaEnabled
   lang
 }
+```
 
 ## BeaverBird.clearCache()
 
