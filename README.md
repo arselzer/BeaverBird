@@ -72,7 +72,7 @@ Download [the latest release](https://github.com/AlexanderSelzer/BeaverBird/rele
 
 Install from npm: `npm install --save beaverbird`
 
-Include it in a &lt;script&gt; tag or use Browserify to require("beaverbird").
+Include it in a `<script>` tag or use Browserify to `require("beaverbird")`.
 
 ## Full Documentation
 
