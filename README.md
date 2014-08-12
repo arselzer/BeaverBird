@@ -88,3 +88,4 @@ See [here](https://github.com/AlexanderSelzer/BeaverBird/blob/master/docs/Beaver
 * Great description of canvas tracking: http://cseweb.ucsd.edu/~hovav/dist/canvas.pdf
 * A site listing many different tracking techniques: http://www.browserleaks.com/
 * Font detection: http://www.lalit.org/lab/javascript-css-font-detect/
+* WebRTC: http://dev.w3.org/2011/webrtc/editor/getusermedia.html#mediastreamtrack

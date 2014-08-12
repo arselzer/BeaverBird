@@ -1,6 +1,6 @@
 {
   "name": "beaverbird",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "all-in-one user tracking",
   "main": "beaverbird.js",
   "directories": {

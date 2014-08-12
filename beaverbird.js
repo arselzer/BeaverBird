@@ -365,6 +365,23 @@ BeaverBird.webgl = function() {
   return output
 }
 
+BeaverBird.webrtc = function(cb) {
+  var output = {
+    enumeration: false
+  }
+  if (window.MediaStreamTrack !== undefined && window.MediaStreamTrack.getSources !== undefined) {
+    window.MediaStreamTrack.getSources(function(sources) {
+      output.sources = sources
+      output.enumeration = true
+
+      cb(output)
+    })
+  }
+  else {
+    cb(output)
+  }
+}
+
 /* Export */
 
 if (typeof module !== "undefined" && module.exports) {
