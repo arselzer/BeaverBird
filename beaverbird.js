@@ -2,35 +2,139 @@
 var BeaverBird = {}
 
 BeaverBird.DEBUG = false;
-// it works fine in alll browsers, except Safari, but the cache should fix most problems.
+// the speed is fine in all browsers, except Safari, where it is quite slow (~30x slower), but the cache should fix this.
 BeaverBird.cache = {};
 
 BeaverBird.clearCache = function() {
   this.cache = {}
 }
 
+/* UIDs */
+
 BeaverBird.uid = function() {
   var data = this.data()
   return MD5(data.canvasFingerprint
-  + ":" + data.dnt // this is actually very Browser-specific ;)
-  + ":" + data.lang
-  + ":" + MD5(data.fonts.join(":")))
+  + ":" + MD5(data.fonts.join(":"))
+  + ":" + JSON.stringify(data.screen)
+  + ":" + JSON.stringify(data.browser)
+  + ":" + JSON.stringify(data.webgl)
+  + ":" + JSON.stringify(BeaverBird.pluginNames()))
 }
 
 BeaverBird.match = function(uid) {
   return BeaverBird.uid() === uid;
 }
 
+/* All Data */
+
 BeaverBird.data = function() {
   return {
     canvasFingerprint: BeaverBird.canvas(),
     fonts: BeaverBird.fonts(),
+    browser: BeaverBird.browser(),
+    plugins: BeaverBird.pluginNames(),
+    screen: BeaverBird.screen(),
+    webgl: BeaverBird.webgl()
+  }
+}
+
+/* Low-hanging data */
+
+BeaverBird.screen = function() {
+  return {
+    width: screen.width,
+    height: screen.height,
+    colorDepth: screen.colorDepth,
+    pixelDepth: screen.pixelDepth
+  }
+}
+
+BeaverBird.browser = function() {
+  return {
     userAgent: navigator.userAgent,
-    dnt: navigator.doNotTrack,
-    javaEnabled: navigator.javaEnabled(),
+    cookies: navigator.cookieEnabled,
+    java: navigator.javaEnabled(),
+    dnt: navigator.doNotTrack, // might be null, "unspecified", undefined if false
     lang: navigator.language
   }
 }
+
+/* Plugins */
+
+/**
+  I would *love* to add more to this list ;)
+  `for (var i = 0; i < navigator.plugins.length; i++) { console.log(navigator.plugins[i].name) }`
+  and email/pull-request/whatever the missing ones. I will happily add more to the list and thank you.
+
+  Windows stuff and mobile would be especially useful
+*/
+
+BeaverBird.PLUGINS = [
+  "Google Talk Plugin Video Renderer",
+  "Google Talk Plugin",
+  "Java Applet Plug-in",
+  "QuickTime Plug-in 7.7.3", // it could be better to leave versioned stuff out... not sure.
+  "Default Browser Helper",
+  "Shockwave Flash",
+  "AdobeAAMDetect",
+  "AdobeExManDetect",
+  "iPhotoPhotocast",
+  "SharePoint Browser Plug-in",
+  "Google Earth Plug-in",
+  "RealPlayer Plugin.plugin",
+  "DivX Web Player",
+  "Wacom Pressure Plug-In",
+  "Microsoft Office Live Plug-in",
+  "Widevine Content Decryption Module", // bah, DRM
+  "Chrome Remote Desktop Viewer",
+  "Chrome PDF Viewer",
+  "Native Client",
+  "Google Talk Plugin Video Renderer",
+  "Unity Player",
+  "Default Browser Helper",
+  "Silverlight Plug-In",
+  "Wacom Tablet Plug-In",
+  "WebKit-integrierte PDF"
+]
+
+BeaverBird.plugins = function() {
+  if (!navigator.plugins)
+    return null
+  /*
+    Firefox and possibly more browsers disallow
+    iterating the PluginArray, so we need to directly
+    query plugins. Doing that is fast, so we can try a
+    whole lot of plugins :D
+  */
+  var plugins = []
+
+  this.PLUGINS.forEach(function(plugin) {
+    var p = navigator.plugins[plugin]
+    if (p !== undefined) {
+      plugins[plugin] = p
+    }
+  })
+
+  return plugins.sort()
+}
+
+// The plugin array is quite large and might take up much memory.
+// Besides, it is probably not needed that often. Just the names are enough
+// in most cases
+
+BeaverBird.pluginNames = function() {
+  if (!navigator.plugins)
+    return null
+
+  return this.PLUGINS.filter(function(plugin) {
+    if (navigator.plugins[plugin] !== undefined) {
+      return true
+    }
+    return false
+  })
+}
+
+/* Canvas Tracking */
 
 BeaverBird.canvas = function() {
   if (BeaverBird.cache.canvas !== undefined) {
@@ -66,9 +170,8 @@ BeaverBird.canvas = function() {
   if (!this.DEBUG)
     document.body.removeChild(canvas)
 
-var time = new Date()
   // the md5 implementation is very slow in safari, so crc32 is used. crc is safe to use too.
-  var result = crc32(imageData.data)
+  var result = crc32(imageData.data).toString()
   BeaverBird.cache.canvas = result
 
   return result
@@ -77,6 +180,8 @@ var time = new Date()
 BeaverBird.matchCanvas = function(string) {
   return string === BeaverBird.canvas()
 }
+
+/* Font detection */
 
 BeaverBird.fonts = function(customFonts) {
   if (this.cache.fonts !== undefined) {
@@ -101,7 +206,7 @@ BeaverBird.fonts = function(customFonts) {
     fonts = customFonts
   }
 
-  var STRING = "wwzrllTNMLllllliiimmqßmmmmiiillllplö😄©_~ñ"
+  var STRING = "wwzrllTNMLllllliiimmqßmmmmiiill❗️🔻llplö😄©_~ñ"
 
   // Set up default font information
 
@@ -186,6 +291,80 @@ BeaverBird.matchFonts = function(fonts) {
   return !doNotMatch
 }
 
+/*
+  see https://www.khronos.org/registry/webgl/specs/1.0/#5.14.1
+
+  if I am missing anything that would be useful for tracking,
+  or something shouldn't be here, please notify
+*/
+
+BeaverBird.WEBGL_PARAMETERS = [
+  "VENDOR",
+  "RENDERER",
+
+  "MAX_COMBINED_TEXTURE_IMAGE_UNITS",
+  "MAX_CUBE_MAP_TEXTURE_SIZE",
+  "MAX_FRAGMENT_UNIFORM_VECTORS",
+  "MAX_RENDERBUFFER_SIZE",
+  "MAX_TEXTURE_IMAGE_UNITS",
+  "MAX_TEXTURE_SIZE",
+  "MAX_VARYING_VECTORS",
+  "MAX_VERTEX_ATTRIBS",
+  "MAX_VERTEX_TEXTURE_IMAGE_UNITS",
+  "MAX_VERTEX_UNIFORM_VECTORS",
+
+  "RED_BITS",
+  "GREEN_BITS",
+  "BLUE_BITS",
+  "ALPHA_BITS",
+  "DEPTH_BITS",
+  "STENCIL_BITS",
+]
+
+BeaverBird.webgl = function() {
+  var output = {}
+  var canvas = document.createElement("canvas")
+
+  var gl = (function getGlContext(canvas) {
+    if (!window.WebGLRenderingContext) {
+      return null
+    }
+
+    var context = null
+
+    try {
+      context = canvas.getContext("webgl")
+      || canvas.getContext("moz-webgl")
+      || canvas.getContext("experimental-webgl")
+      || canvas.getContext("webkit-3d")
+    }
+    catch (err) {
+      // whatever.... no, really, we don't care
+    }
+
+    return context
+  })(canvas)
+
+  if (gl === null) {
+    return null
+  }
+
+  /* Get all WebGL parameters */
+
+  output.parameters = {}
+
+  this.WEBGL_PARAMETERS.forEach(function(param) {
+    if (gl[param.toUpperCase()] !== undefined)
+      output.parameters[param.toLowerCase()] = gl.getParameter(gl[param.toUpperCase()])
+  })
+
+  /* Find all WebGL extensions */
+
+  output.extensions = gl.getSupportedExtensions()
+
+  return output
+}
+
 /* Export */
 
 if (typeof module !== "undefined" && module.exports) {
@@ -199,7 +378,7 @@ else {
 /* Libraries */
 // copy-pasted for convenience.
 
-// md5 implementation (https://github.com/satazor/SparkMD5), modified
+// md5 implementation (https://github.com/satazor/SparkMD5), modified for size
 
 var MD5
 (function () {

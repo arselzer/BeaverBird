@@ -1,6 +1,6 @@
 # BeaverBird
 
-## BeaverBird.uid() -> string
+## BeaverBird.uid()
 
 Retrieve a unique id.
 
@@ -12,23 +12,39 @@ not yet 1, it can be expected that the output is different.
 
 Check if the user id matches the id of the current user.
 
-## BeaverBird.canvas() -> string
+## BeaverBird.screen()
 
-Returns the canvas fingerprint (a crc32 hash)
+Returns data of the computer's screen.
 
-## BeaverBird.matchCanvas(string) -> boolean
+`{width, height, colorDepth, pixelDepth}`
+
+## BeaverBird.browser()
+
+`{userAgent, cookies, java, dnt, lang}`
+
+## BeaverBird.plugins()
+
+Get a list of browser plugins.
+Returns a map of name -> Plugin
+
+## BeaverBird.pluginNames()
+
+Get a list of only the plugin names.
+
+## BeaverBird.canvas()
+
+Returns the canvas fingerprint (a crc32 hash, string)
+
+## BeaverBird.matchCanvas(canvas) -> boolean
 
 Checks if the canvas fingerprint matches the current client's.
 
-## BeaverBird.fonts([]string fonts) -> []string
+## BeaverBird.fonts(overrideFonts[])
 
 If `fonts` is defined, the default fonts will not be used,
 otherwise, the default list of fonts will be used.
 
-This list will be enhanced with time, but it will when changes
-break backwards-compability.
-
-## BeaverBird.matchFonts([]string] input) -> boolean
+## BeaverBird.matchFonts(fonts[]) -> boolean
 
 Checks if the lists of fonts are exactly the same
 
@@ -38,10 +54,10 @@ returns a list of all tracking data that could be extracted.
 {
   canvasFingerprint
   fonts
-  userAgent
-  dnt
-  javaEnabled
-  lang
+  browser
+  plugins
+  screen
+  webgl:
 }
 ```
 
@@ -50,9 +66,3 @@ returns a list of all tracking data that could be extracted.
 While it is not recommended to access the retrieving functions repeatedly (nor makes it much sense),
 this will guard against possible performance issues.
 It often makes semantic sense to .match() and then .id() in a real scenario. This makes that use case perform well.
-
-# Planned
-
-## BeaverBird.dataSimilarity(data) -> int (0-1)
-
-Calculate the similarity of the data.

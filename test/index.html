@@ -16,17 +16,18 @@
     var fonts = BeaverBird.fonts()
     var data = BeaverBird.data()
     var uid = BeaverBird.uid()
+    var plugins = BeaverBird.plugins()
+    var webgl = BeaverBird.webgl()
+
     console.log("time:", ((new Date()) - time))
 
     console.log("canvas id: ", canvasId)
     console.log("uid:", uid)
     console.log("data: ", BeaverBird.data())
     console.log("fonts: ", fonts)
+    console.log("webgl:", webgl),
+    console.log("plugins:", plugins)
 
-    console.log("canvas matches: ", BeaverBird.matchCanvas(canvasId))
-    console.log("fonts match:", BeaverBird.matchFonts(fonts))
-    console.log("uid matches:", BeaverBird.match(uid))
-    //console.log("data matches:", BeaverBird.matchData(data))
     </script>
   </body>
 </html>
