@@ -50,10 +50,27 @@ Include it in a `<script>` tag or use Browserify to `require("beaverbird")`.
 
 See [here](https://github.com/AlexanderSelzer/BeaverBird/blob/master/docs/BeaverBird.md)
 
-## Information
+## Todo List
+#### Contributions are encouraged!
+
+* releasing version 1.0 soon, guaranteeing a stable API
+* Improvements in Windows-specific tracking (ActiveX, Silverlight?, plugins, fonts...)
+* Achieving a higher degree of accuracy on mobile devices (especially iOS), if possible
+
+* Implementing WebCL tracking if useful
+* Gathering information using flash / finding a good way to embed and build the swf file
+* Implementing statistical ways for finding browser uniqueness
+
+## Information about tracking
 
 * canvas tracking: http://cseweb.ucsd.edu/~hovav/dist/canvas.pdf
 * many different tracking techniques: http://www.browserleaks.com/
 * Font detection described: http://www.lalit.org/lab/javascript-css-font-detect/
+* Some ideas worth implementing: http://browserspy.dk/
+* Interesting statistical methods: https://panopticlick.eff.org/browser-uniqueness.pdf
+* https://www.eff.org/deeplinks/2010/01/primer-information-theory-and-privacy
+
+### Other Useful documents
+
 * WebRTC: http://dev.w3.org/2011/webrtc/editor/getusermedia.html#mediastreamtrack
 * WebGL: https://www.khronos.org/registry/webgl/specs/1.0/
