@@ -144,6 +144,7 @@ BeaverBird.canvas = function() {
   var canvas = document.createElement("canvas")
   canvas.width = 280
   canvas.height = 60
+  canvas.dir = "ltr"
 
   if (!this.DEBUG)
     canvas.style.display = "none"
